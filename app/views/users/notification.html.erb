@@ -1,0 +1,16 @@
+<div class="post-bar">
+    <%@notifications.map do |noti|%>
+    <div class="post_topbar">
+        <div class="usy-dt">
+            <img style="height: 50px;width: 50px" src="<%=profil_pic(noti.sentby)%>" alt="">
+            <div class="usy-name">
+                <h3><%=noti.sentby.name%></h3>
+                <span><img src="http://gambolthemes.net/workwise_demo/HTML/images/clock.png" alt="">3 min ago</span>
+                <p>
+                    <%=notify(noti)%>
+                </p>
+            </div>
+        </div>
+    </div>
+    <%end%>
+</div>

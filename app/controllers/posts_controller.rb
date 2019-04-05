@@ -1,0 +1,72 @@
+class PostsController < ApplicationController
+  def index
+    @posts = Post.all.order(created_at: :desc)
+    @users = User.all
+    @current_userliked_post = Like.where(user_id: current_user.id).pluck(:post_id) if current_user.present?
+  end
+
+  def destroy
+    cmd = Comment.where(post_id: params[:id])
+    cmd.delete_all if cmd.present?
+    like = Like.where(post_id: params[:id])
+    like.delete_all if like.present?
+    post = Post.find(params[:id]).delete
+    if Post
+      flash[:notice] = "post deleted Successfully"
+    else
+      flash[:notice] = "Something went wrong please try again"
+      flash[:color] = "invalid"
+    end
+  end
+
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def post_filter
+    @posts = Post.where(" '#{params[:id]}' = ANY (tags)")
+    @users = User.all
+    @current_userliked_post = Like.where(user_id: current_user.id).pluck(:post_id) if current_user.present?
+    render "index"
+  end
+
+  def create
+    post = Post.new(content: params[:content], media: params[:media], media_type: params[:media_type], user_id: current_user.id, tags: params[:tags].split(", "))
+
+    if post.save
+      @friendlist = Friendlist.where(sender_id: current_user.id, is_accepted: true).or(Friendlist.where(recipient_id: current_user.id, is_accepted: true))
+      @friendlist.map do |friend|
+        notify_to = current_user.id != friend.sender_id ? friend.sender_id : friend.recipient_id
+        notification = Notification.create(sentby_id: current_user.id, receivedby_id: notify_to, post_id: post.id, notify_type_id: 3, is_read: false)
+      end
+      redirect_to posts_path
+    else
+      flash[:notice] = "Something went wrong please try again"
+      flash[:color] = "invalid"
+    end
+  end
+
+  def like
+    is_liked = Like.find_by(post_id: params[:post_id], user_id: params[:user_id])
+    if is_liked
+      is_liked.delete
+      like_count = Like.where(post_id: params[:post_id])
+      render json: { is_like: false, like_count: like_count.count }
+    else
+      like = Like.new(user_id: params[:user_id], post_id: params[:post_id])
+      if like.save
+        @friendlist = Friendlist.where(sender_id: current_user.id, is_accepted: true).or(Friendlist.where(recipient_id: current_user.id, is_accepted: true))
+        @friendlist.map do |friend|
+          notify_to = current_user.id != friend.sender_id ? friend.sender_id : friend.recipient_id
+          notification = Notification.create(sentby_id: current_user.id, receivedby_id: notify_to, post_id: params[:post_id], notify_type_id: 4, like_id: like.id, is_read: false)
+        end
+
+        like_count = Like.where(post_id: params[:post_id])
+        flash[:notice] = "Liked Successfully"
+        render json: { is_like: true, like_count: like_count.count }
+      else
+        format[:notice] = "Something went wrong"
+      end
+    end
+  end
+end

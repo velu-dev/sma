@@ -1,0 +1,84 @@
+<div class="main-section">
+    <div class="container">
+        <div class="main-section-data">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+                </div>
+                <div class="post-bar no-margin col-lg-6 col-md-8 pd-left-none no-pd">
+                    <div class="acc-setting">
+                        <p id="notice"><%= notice %></p>
+                        <h3 class="align-center">Login</h3>
+                        <%= form_tag({:action => 'update'}, multipart: true) do %>
+                        <div class="cp-field">
+                            <h5>Name</h5>
+                            <div class="cpp-fiel">
+                                <input type="text" disabled name="Name" value="<%= @user.name%>">
+                                <i class="fa fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="cp-field">
+                            <h5>Mobile</h5>
+                            <div class="cpp-fiel">
+                                <input type="text" disabled name="Mobile" value="<%= @user.mobile%>">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                        </div>
+                        <div class="cp-field">
+                            <h5>Email</h5>
+                            <div class="cpp-fiel">
+                                <input type="text" disabled name="Email" value="<%= @user.email%>">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                        </div>
+                        <!-- <div class="cp-field">
+                  <h5>Password</h5>
+                  <div class="cpp-fiel">
+                    <input type="password" name="password" placeholder="Password">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                </div> -->
+                        <div class="cp-field">
+                            <h5>Designation</h5>
+                            <div class="cpp-fiel">
+                            <%if @user.user_detail.present?%>
+                                <input type="text" name="designation" value="<%=@user.user_detail.designation%>" placeholder="Designation" required>
+                            <%else%>
+                            <input type="text" name="designation" value="" placeholder="Designation" required>
+                            <%end%>
+                                <i class="fa fa-briefcase"></i>
+                            </div>
+                        </div>
+                        <div class="cp-field">
+                            <h5>Location</h5>
+                            <div class="cpp-fiel">
+                            <%if @user.user_detail.present?%>
+                                <input type="text" name="location"  value="<%=@user.user_detail.location%>" placeholder="Location" required>
+                            <%else%>
+                            <input type="text" name="location"  value="" placeholder="Location" required>
+                            <%end%>
+                                
+                                <i class="fa fa-map-marker"></i>
+                            </div>
+                        </div>
+                        <div class="cp-field">
+                            <h5>Profile Picture</h5>
+                            <div class="cpp-fiel">
+                                    <%= file_field_tag "profile_pic" %>
+                                
+                                <i class="fa fa-picture-o"></i>
+                            </div>
+                        </div>
+                        <div class="save-stngs pd2">
+                            <ul>
+                                <li><button type="submit">Update</button></li>
+                            </ul>
+                        </div>
+                        <!--save-stngs end-->
+                        <%end%>
+                    </div>
+                </div>
+                <!--acc-setting end-->
+            </div>
+        </div>
+    </div>
+</div>

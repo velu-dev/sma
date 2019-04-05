@@ -1,0 +1,319 @@
+<div class="main-section">
+  <div class="container">
+    <div class="main-section-data">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+          <div class="main-left-sidebar no-margin">
+            <% if current_user.present?%>
+            <div class="user-data full-width">
+              <div class="user-profile">
+                <div class="username-dt">
+                  <div class="usr-pic">
+                    <img style="height: 100px;width: 100px" src="<%= profil_pic(current_user)%>" alt="">
+                  </div>
+                </div>
+                <!--username-dt end-->
+                <div class="user-specs">
+                  <h3><%=current_user.name%></h3>
+                  <span>
+                    <%if current_user.user_detail.present?%>
+                    <%= current_user.user_detail.designation%>
+                    <%else %>
+                    <p> Update Profile
+                      <p>
+                        <%end%>
+                  </span>
+                </div>
+              </div>
+              <!--user-profile end-->
+              <ul class="user-fw-status">
+                <!--  <li>
+                    <h4>Following</h4>
+                    <span>34</span>
+                  </li>
+                  <li>
+                    <h4>Followers</h4>
+                    <span>155</span>
+                  </li-->
+                <li>
+                  <a href="<%= profile_path(current_user.id)%>" title="">View Profile</a>
+                </li>
+              </ul>
+            </div>
+            <%end%>
+            <!--user-data end-->
+            <!--div class="suggestions full-width">
+              <div class="sd-title">
+                <h3>Suggestions</h3>
+                <i class="la la-ellipsis-v"></i>
+              </div>
+              <div class="suggestions-list">
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s1.png" alt="">
+                  <div class="sgt-text">
+                    <h4>Jessica William</h4>
+                    <span>Graphic Designer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s2.png" alt="">
+                  <div class="sgt-text">
+                    <h4>John Doe</h4>
+                    <span>PHP Developer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s3.png" alt="">
+                  <div class="sgt-text">
+                    <h4>Poonam</h4>
+                    <span>Wordpress Developer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s4.png" alt="">
+                  <div class="sgt-text">
+                    <h4>Bill Gates</h4>
+                    <span>C & C++ Developer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s5.png" alt="">
+                  <div class="sgt-text">
+                    <h4>Jessica William</h4>
+                    <span>Graphic Designer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s6.png" alt="">
+                  <div class="sgt-text">
+                    <h4>John Doe</h4>
+                    <span>PHP Developer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="view-more">
+                  <a href="#" title="">View More</a>
+                </div>
+              </div>
+            </div-->
+            <!--suggestions end-->
+            <!--tags-sec end-->
+          </div>
+          <!--main-left-sidebar end-->
+        </div>
+        <div class="col-lg-6 col-md-8 no-pd">
+          <div class="main-ws-sec">
+            <%if current_user.present? %>
+            <div class="post-topbar">
+              <div class="user-picy">
+                <img style="height: 50px;width: 50px; border-radius: 50%;"
+                  src="<%= profil_pic(current_user)%>" alt="">
+              </div>
+              <div class="post-st">
+                <ul>
+                  <li><a class="post_project active" title="">Post </a></li>
+                  <!-- <li><a class="post-jb active" href="#" title="">Post a Job</a></li> -->
+                </ul>
+              </div>
+              <!--post-st end-->
+            </div>
+            <% end %>
+            <!--post-topbar end-->
+            <div class="posts-section">
+              <%= render @posts %>
+              <!--posty end-->
+              <!--process-comm end-->
+            </div>
+            <div class="top-profiles">
+              <div class="pf-hd">
+                <h3>Top Profiles</h3>
+                <i class="la la-ellipsis-v"></i>
+              </div>
+              <div class="profiles-slider">
+                <%@users.map do |user|%>
+                <div class="user-profy">
+                  <img style="height: 50px;width: 50px; border-radius: 50px" src="<%= profil_pic(user)%>" alt="">
+                  <h3><%=user.name%></h3>
+                  <span>
+                    <%if user.user_detail.present?%>
+                    <%=user.user_detail.designation%>
+                    <%end%>
+                  </span>
+                  <a href="<%= profile_path(user.id)%>" title="">View Profile</a>
+                </div>
+                <%end%>
+              </div>
+            </div>
+            <!--top-profiles end-->
+          </div>
+          <!--main-ws-sec end-->
+        </div>
+        <div class="col-lg-3 pd-right-none no-pd">
+          <div class="right-sidebar">
+            <% unless current_user.present?%>
+            <div class="widget widget-about">
+              <img src="http://gambolthemes.net/workwise_demo/HTML/images/wd-logo.png" alt="">
+              <h3>Join our Community</h3>
+              <span>post and comment your Queries</span>
+              <div class="sign_link">
+                <h3><a href="<%= signup_path%>" title="">Sign up</a></h3>
+                |
+                <h3><a href="<%= login_path%>" title="">Sign In</a></h3>
+              </div>
+            </div>
+            <%end%>
+            <!--widget-about end-->
+            <!--div class="widget suggestions full-width">
+              <div class="sd-title">
+                <h3>Most Viewed People</h3>
+                <i class="la la-ellipsis-v"></i>
+              </div>
+              <div class="suggestions-list">
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s1.png" alt="">
+                  <div class="sgt-text">
+                    <h4>Jessica William</h4>
+                    <span>Graphic Designer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s2.png" alt="">
+                  <div class="sgt-text">
+                    <h4>John Doe</h4>
+                    <span>PHP Developer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s3.png" alt="">
+                  <div class="sgt-text">
+                    <h4>Poonam</h4>
+                    <span>Wordpress Developer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s4.png" alt="">
+                  <div class="sgt-text">
+                    <h4>Bill Gates</h4>
+                    <span>C &amp; C++ Developer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s5.png" alt="">
+                  <div class="sgt-text">
+                    <h4>Jessica William</h4>
+                    <span>Graphic Designer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="suggestion-usd">
+                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s6.png" alt="">
+                  <div class="sgt-text">
+                    <h4>John Doe</h4>
+                    <span>PHP Developer</span>
+                  </div>
+                  <span><i class="la la-plus"></i></span>
+                </div>
+                <div class="view-more">
+                  <a href="#" title="">View More</a>
+                </div>
+              </div>
+            </div-->
+          </div>
+          <!--right-sidebar end-->
+        </div>
+      </div>
+    </div>
+    <!-- main-section-data end-->
+  </div>
+</div>
+<div class="post-popup pst-pj">
+  <div class="post-project">
+    <h3>Create Post</h3>
+    <div class="post-project-fields">
+      <%= form_tag({:action => 'create'},remote: true, multipart: true) do %>
+      <div class="row">
+        <div class="col-lg-12">
+          <textarea name="content" placeholder="Type your Query here" required></textarea>
+        </div>
+        <div class="col-lg-12">
+          <input type="text" class="form-control" name="tags" placeholder="red,green,blue" />
+        </div>
+        <div class="col-lg-6">
+          <%= file_field_tag "media", {:onchange => "readURL(this);" } %>
+          <%# <input type="file" name="media" onchange="readURL(this);" placeholder="Select Media"> %>
+        </div>
+        <div class="col-lg-6">
+          <input type="hidden" name="media_type" id="media_type">
+        </div>
+        <div class="col-lg-12">
+          <img id="img_prev" class="disable_media_img animated fadeIn" src="#" alt="your image" />
+          <video class="disable_media_vid animated fadeIn" controls id="vid_prev">
+            <source src="#" type="video/mp4">
+          </video>
+        </div>
+        <div class="col-lg-12">
+          <ul>
+            <li><button class="active" type="submit" value="post">Post</button></li>
+            <!-- <li><a href="#" title="">Cancel</a></li> -->
+          </ul>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <!--post-project-fields end-->
+    <a title=""><i class="la la-times-circle-o"></i></a>
+  </div>
+  <!--post-project end-->
+</div>
+<!--post-project-popup end-->
+<style>
+  .disable_media_img,
+  .disable_media_vid {
+    display: none;
+  }
+
+  .enable_media,
+  .enable_comments {
+    display: block;
+  }
+</style>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      $("#media_type").val(input.files[0].type.split('/')[0]);
+      console.log(input.files[0].type.split('/'))
+      if (input.files[0].type.split('/')[0] == "image") {
+        id = "#img_prev"
+        $("#img_prev").removeClass("disable_media_img");
+        $("#img_prev").addClass("enable_media");
+        $("#vid_prev").addClass("disable_media_vid");
+        $("#vid_prev").removeClass("enable_media");
+
+      } else if (input.files[0].type.split('/')[0] == "video") {
+        id = "#vid_prev"
+        $("#vid_prev").removeClass("disable_media_vid");
+        $("#vid_prev").addClass("enable_media");
+        $("#img_prev").addClass("disable_media_img");
+        $("#img_prev").removeClass("enable_media");
+      }
+      reader.onload = function (e) {
+        $(id)
+          .attr('src', e.target.result)
+          .width(250)
+          .height(250);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>

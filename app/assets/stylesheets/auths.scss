@@ -1,0 +1,27 @@
+// Place all the styles related to the sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.error{
+    height: 50px;
+    width: 95%;
+    background: #f44336;
+    margin: 0 auto;
+    margin-top: 10px;
+    p{
+        font-size: 18px !important;
+        color: #fff !important;
+        padding: 12px !important;
+    }
+}
+.success{
+    height: 50px;
+    width: 95%;
+    background: #4CAF50;
+    margin: 0 auto;
+    margin-top: 10px;
+    p{
+        font-size: 18px !important;
+        color: #fff !important;
+        padding: 12px !important;
+    }
+}

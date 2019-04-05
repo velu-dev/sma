@@ -1,0 +1,20 @@
+<div class="comment-sec comment<%= @comment.id%>">
+    <ul>
+        <li>
+            <div class="comment-list">
+                <div class="bg-img">
+                    <img style="height: 30px;width: 30px" src="<%= profil_pic(@comment.user)%>" alt="">
+                </div>
+                <div class="comment">
+                    <h3><%= @comment.user.name%></h3>
+                    <p><%= @comment.comment%> </p>
+                </div>
+                <div class="ed-opts">
+                    <a href="#" title="" onclick="delCmd('<%= @comment.id%>')" class="ed-opts-open"><i
+                            class="la la-trash"></i></a>
+                </div>
+            </div>
+            <!--comment-list end-->
+        </li>
+    </ul>
+</div>

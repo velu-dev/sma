@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Code Hub</title>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'animate', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'bootstrap.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'line-awesome', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'line-awesome-font-awesome.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'font-awesome.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'jquery.mCustomScrollbar.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'slick', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'slick-theme', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'style', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'responsive', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' ,'data-turbolinks-track'=> 'reload' %>
+    <%#= javascript_include_tag 'jquery.min' %>
+    <%#= javascript_include_tag 'popper'%>
+    <%#= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'jquery.mCustomScrollbar', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'slick.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'scrollbar', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'script', 'data-turbolinks-track': 'reload' %>
+    <meta charset="UTF-8">
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <%= render partial: "common/sidebar"%>
+      <main>
+        <%= yield %>
+      </main>
+      <%= render partial: "common/footer"%>
+    </div>
+  </body>
+</html>
+<script>
+  $(".post_project").on("click", function(){
+         $(".post-popup.pst-pj").addClass("active");
+         $(".wrapper").addClass("overlay");
+         return false;
+     });
+     $(".post-project > a").on("click", function(){
+         $(".post-popup.pst-pj").removeClass("active");
+         $(".wrapper").removeClass("overlay");
+         return false;
+     });
+         $(".not-box-open").on("click", function(){
+        $(this).next(".notification-box").toggleClass("active");
+    });
+</script>

@@ -1,0 +1,114 @@
+<div class="post post<%=post.id%>">
+    <div class="post-bar no-margin">
+        <div class="post_topbar">
+            <div class="usy-dt">
+                <img style="height: 50px;width: 50px" src="<%= profil_pic(post.user)%>" alt="">
+                <div class="usy-name">
+                    <h3><%=post.user.name.capitalize%></h3>
+                    <span><img src="http://gambolthemes.net/workwise_demo/HTML/images/clock.png"
+                            alt=""><%=time_calculation(post.created_at)%> ago</span>
+                </div>
+            </div>
+            <div class="ed-opts">
+                <%if current_user.present?%>
+                <%if post.user_id == current_user.id%>
+                <a title="" onclick="delPost('<%=post.id%>')" class="ed-opts-open"><i class="la la-trash"></i></a>
+                <%end%>
+                <%end%>
+            </div>
+        </div>
+        <div class="epi-sec">
+            <ul class="descp">
+                <li><img src="http://gambolthemes.net/workwise_demo/HTML/images/icon9.png" alt=""><span>
+                <% if current_user.present? %>
+                        <%if current_user.user_detail.present?%>
+                        <%=post.user.user_detail.location%>
+                        <%end%>
+                        <%end%>
+                        </span></li>
+            </ul>
+        </div>
+        <div class="job_descp">
+            <%if post.user.user_detail.present?%>
+            <h3><%=post.user.user_detail.designation%></h3>
+            <%end%>
+            <p><%= post.content%>
+                <!-- <a href="#" title="">view more</a> -->
+            </p>
+
+            <div class="media">
+                <%if post.media_type == 'image'%>
+                <img class="animated fadeIn media_display" src="<%=post.media.url%>" alt="your image" />
+<%end%>
+<%if post.media_type == 'video'%>
+  <video class="animated fadeIn media_display" controls>
+    <source src="<%=post.media.url%>" type="video/mp4">
+  </video>
+<%end%>
+</div>
+<br>
+<ul class="skill-tags">
+  <%post.tags.map do |tag|%>
+    <li><a href="<%= post_filter_path(id: tag)%>" title=""><%= tag%></a></li>
+  <%end%>
+</ul>
+</div>
+<div class="job-status-bar">
+  <ul class="like-com">
+    <li>
+      <%if current_user.present?%>
+        <%if @current_userliked_post.include?(post.id)%>
+          <a onclick="likePost('<%= post.id%>','<%= current_user.id%>')" id="like<%=post.id%>"
+                        class="active"><i class="la la-heart"></i> Like</a>
+          <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
+          <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
+        <%else%>
+          <a onclick="likePost('<%= post.id%>','<%= current_user.id%>')" id="like<%=post.id%>"><i
+                            class="la la-heart"></i> Like</a>
+          <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
+          <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
+        <%end%>
+      <%else%>
+        <a id="like<%=post.id%>"><i class="la la-heart"></i> Like</a>
+        <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
+        <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
+      <%end%>
+    </li>
+    <li onclick="openComment('<%=post.id%>')"><a title="" class="com<%=post.id%>"><img
+                            src="http://gambolthemes.net/workwise_demo/HTML/images/com.png" alt="">
+          Comment</a>
+        <span style="margin-left: 0px;" id="cmd_count<%=post.id%>"> <%=post.comments.count%> </span>
+      </li>
+    </ul>
+  </div>
+</div>
+<!--post-bar end-->
+<div class="comment-section disabled-comments" id="cmd_sec<%=post.id%>">
+  <%post.comments.map do |comment|%>
+    <%= render comment%>
+  <%end%>
+  <!--comment-sec end-->
+  <%if current_user.present?%>
+    <div class="post-comment">
+      <%# <div class="cm_img">
+                
+            </div> %>
+      <div class="comment_box">
+          <img style="height: 50px;width: 50px; border-radius: 50%;"
+                    src="<%= profil_pic(current_user)%>" alt="">
+        <%#= form_tag({:action => 'create', :controller => "comments"},remote: true) do %>
+          <input type="text" name="comment" id="comment<%= post.id%>" value="" placeholder="Post a comment">
+          <input type="hidden" name="post_id" value="<%= post.id%>">
+          <button class="btn btn-submit" onclick="postComment('<%= post.id%>')" type="submit">Comment</button>
+          <%#end%>
+        </div>
+      </div>
+    <%else%>
+      <div class="post-comment">
+        <h2>If you want to comment here please sign in </h2>
+      </div>
+    <%end%>
+    <!--post-comment end-->
+  </div>
+  <!--comment-section end-->
+</div>

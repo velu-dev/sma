@@ -1,0 +1,29 @@
+<div class="comment-sec comment<%=comment.id%>">
+    <ul>
+        <li>
+            <div class="comment-list">
+                <div class="bg-img">
+                    <img style="height: 30px;width: 30px" src="<%= profil_pic(comment.user)%>" alt="">
+                </div>
+                <div class="comment">
+                    <h3><%= comment.user.name%></h3>
+
+                    <span>
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/clock.png" alt="">
+                    <%=time_calculation(comment.created_at)%>
+                    </span>
+                    <p><%= comment.comment%> </p>
+                </div>
+                <div class="ed-opts">
+                    <%if current_user.present?%>
+                    <%if comment.user_id == current_user.id%>
+                    <a title="" onclick="delCmd('<%=comment.id%>', '<%=comment.post.id%>')" class="ed-opts-open"><i
+                            class="la la-trash"></i></a>
+                    <%end%>
+                    <%end%>
+                </div>
+            </div>
+            <!--comment-list end-->
+        </li>
+    </ul>
+</div>
