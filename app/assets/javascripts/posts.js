@@ -11,8 +11,15 @@ function delPost(id) {
   }
 }
 function openComment(id) {
-  $("#cmd_sec" + id).removeClass("disabled-comments");
-  $("#cmd_sec" + id).addClass("enable_comments  ");
+  var class_name = $("#cmd_sec"+ id).attr('class');
+  if (class_name.split(" ")[1] == "disabled-comments") {
+    $("#cmd_sec" + id).removeClass("disabled-comments");
+    $("#cmd_sec" + id).addClass("enable_comments  ");
+  } else {
+    $("#cmd_sec" + id).addClass("disabled-comments");
+    $("#cmd_sec" + id).removeClass("enable_comments  ");
+  }
+
 }
 
 function postComment(id) {

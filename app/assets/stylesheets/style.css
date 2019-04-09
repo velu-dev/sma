@@ -1021,7 +1021,7 @@ main {
 	border-left: 1px solid #e4e4e4;
 	border-right: 1px solid #e4e4e4;
 	border-bottom: 1px solid #e4e4e4;
-	margin-bottom: 20px;
+	margin-bottom: 20px !important;
 }
 .post_topbar {
 	float: left;
@@ -1563,7 +1563,7 @@ main {
 }
 .comment-list {
 	display: table;
-	padding-bottom: 30px;
+	/* padding-bottom: 30px; */
 }
 .bg-img {
 	display: table-cell;

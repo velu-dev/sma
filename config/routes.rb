@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "errors/not_found"
   get "profile", to: "users#profile"
   get "edit", to: "users#edit"
   post "users/update"
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   post "users/reject_request"
   post "users/delete_friend"
   get "users/notification"
+  post "users/notification_status"
   # get "index", to: "posts#index"
   get "login", to: "auths#signin"
   get "signup", to: "auths#signup"
@@ -21,6 +23,9 @@ Rails.application.routes.draw do
   get "posts/post_filter/:id", to: "posts#post_filter", as: "post_filter"
   resources :posts
   resources :comments
+  get "/404", to: "errors#not_found"
+  get "/422", to: "errors#unacceptable"
+  get "/500", to: "errors#server_error"
   # get "posts/:id", to: "posts#show", as: "posts"
   # delete "posts/:id", to: "posts#destroy", as: "posts"
   # post "posts/create"

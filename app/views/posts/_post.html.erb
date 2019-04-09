@@ -1,5 +1,5 @@
-<div class="post post<%=post.id%>">
-    <div class="post-bar no-margin">
+<div id="<%=post.id%>" class="post post<%=post.id%>">
+    <div style="margin-bottom: 20px;" class="post-bar no-margin">
         <div class="post_topbar">
             <div class="usy-dt">
                 <img style="height: 50px;width: 50px" src="<%= profil_pic(post.user)%>" alt="">
@@ -12,8 +12,8 @@
             <div class="ed-opts">
                 <%if current_user.present?%>
                 <%if post.user_id == current_user.id%>
-                <a title="" onclick="delPost('<%=post.id%>')" class="ed-opts-open"><i class="la la-trash"></i></a>
-                <%end%>
+                <a title="" href="javascript:void(0);" onclick="delPost('<%=post.id%>')" class="ed-opts-open"><i class="la la-trash"></i></a>
+                <%end%> 
                 <%end%>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <ul class="descp">
                 <li><img src="http://gambolthemes.net/workwise_demo/HTML/images/icon9.png" alt=""><span>
                 <% if current_user.present? %>
-                        <%if current_user.user_detail.present?%>
+                        <%if post.user.user_detail.present?%>
                         <%=post.user.user_detail.location%>
                         <%end%>
                         <%end%>
@@ -58,23 +58,23 @@
     <li>
       <%if current_user.present?%>
         <%if @current_userliked_post.include?(post.id)%>
-          <a onclick="likePost('<%= post.id%>','<%= current_user.id%>')" id="like<%=post.id%>"
+          <a  href="javascript:void(0);" onclick="likePost('<%= post.id%>','<%= current_user.id%>')" id="like<%=post.id%>"
                         class="active"><i class="la la-heart"></i> Like</a>
           <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
           <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
         <%else%>
-          <a onclick="likePost('<%= post.id%>','<%= current_user.id%>')" id="like<%=post.id%>"><i
+          <a  href="javascript:void(0);" onclick="likePost('<%= post.id%>','<%= current_user.id%>')" id="like<%=post.id%>"><i
                             class="la la-heart"></i> Like</a>
           <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
           <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
         <%end%>
       <%else%>
-        <a id="like<%=post.id%>"><i class="la la-heart"></i> Like</a>
+        <a  href="javascript:void(0);" id="like<%=post.id%>"><i class="la la-heart"></i> Like</a>
         <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
         <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
       <%end%>
     </li>
-    <li onclick="openComment('<%=post.id%>')"><a title="" class="com<%=post.id%>"><img
+    <li onclick="openComment('<%=post.id%>')"><a  href="javascript:void(0);" title="" class="com<%=post.id%>"><img
                             src="http://gambolthemes.net/workwise_demo/HTML/images/com.png" alt="">
           Comment</a>
         <span style="margin-left: 0px;" id="cmd_count<%=post.id%>"> <%=post.comments.count%> </span>
@@ -94,7 +94,7 @@
                 
             </div> %>
       <div class="comment_box">
-          <img style="height: 50px;width: 50px; border-radius: 50%;"
+        <img style="height: 30px;width: 30px; border-radius: 50%;"
                     src="<%= profil_pic(current_user)%>" alt="">
         <%#= form_tag({:action => 'create', :controller => "comments"},remote: true) do %>
           <input type="text" name="comment" id="comment<%= post.id%>" value="" placeholder="Post a comment">

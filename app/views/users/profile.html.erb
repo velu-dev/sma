@@ -2,8 +2,6 @@
     <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/cover-img.jpg" alt="">
     <!-- <a href="#" title=""><i class="fa fa-camera"></i> Change Image</a> -->
 </section>
-
-
 <div class="main-section">
     <div class="container">
         <div class="main-section-data">
@@ -13,14 +11,12 @@
                         <div class="user_profile">
                             <div class="user-pro-img">
                                 <%if @user.user_detail.present?%>
-                                <img style="height: 200px;width: 200px" src="<%=profil_pic(@user)%>"
-                                    alt="">
+                                <img style="height: 200px;width: 200px" src="<%=profil_pic(@user)%>" alt="">
                                 <%else%>
                                 <img style="height: 200px;width: 200px" src="" alt="">
                                 <%end%>
                                 <!-- <a href="#" title=""><i class="fa fa-camera"></i></a> -->
                             </div>
-
                         </div>
                     </div>
                     <!--main-left-sidebar end-->
@@ -40,44 +36,43 @@
                     </div>
                     <!--main-ws-sec end-->
                 </div>
-
                 <div class="col-lg-3">
                     <div class="right-sidebar">
                         <div class="message-btn">
                             <%if current_user.id == @user.id%>
-                                <a href="<%=edit_path%>" title=""><i class="fa fa-pencil"></i> Update</a>
+                            <a href="<%=edit_path%>" title=""><i class="fa fa-pencil"></i> Update</a>
                             <%else%>
-                                <%if @status[:is_requested]%>
-                                    <%if @status[:is_accepted]%>
-                                        <a title=""><i class="fa fa-check"></i> Friends</a>
-                                        <%= link_to users_delete_friend_path(@user.id), method: :post do %>
-                                                <i class="fa fa-times"></i>Delete Friend
-                                            <% end %>
-                                        <%# <a title=""><i class="fa fa-check"></i> Delete Friend</a> %>
-                                    <%else%>
-                                        <%if @status[:is_send]%>
-                                            <a title="" class="btn-success"><i class="fa fa-check"></i> Friend Request sent</a>
-                                            <br>
-                                            <br>
-                                            <%= link_to users_cancle_request_path(@user.id), method: :post do %>
-                                                <i class="fa fa-times"></i>Cancle Request
-                                            <% end %>
-                                        <%else%>
-                                            <%= link_to users_confirm_request_path(@user.id), method: :post do %>
-                                                <i class="fa fa-plus"></i>Confirm Request
-                                            <% end %>
-                                            <br>
-                                            <br>
-                                            <%= link_to users_reject_request_path(@user.id), method: :post do %>
-                                                <i class="fa fa-times"></i>Reject Request
-                                            <% end %>
-                                        <%end%>
-                                    <%end%>
-                                <%else%>
-                                    <%= link_to users_add_friend_path(@user.id), method: :post do %>
-                                        <i class="fa fa-plus"></i>Add Friend
-                                    <% end %>
-                                <%end%>
+                            <%if @status[:is_requested]%>
+                            <%if @status[:is_accepted]%>
+                            <a title=""><i class="fa fa-check"></i> Friends</a>
+                            <%= link_to users_delete_friend_path(@user.id), method: :post do %>
+                            <i class="fa fa-times"></i>Delete Friend
+                            <% end %>
+                            <%# <a title=""><i class="fa fa-check"></i> Delete Friend</a> %>
+                            <%else%>
+                            <%if @status[:is_send]%>
+                            <a title="" class="btn-success"><i class="fa fa-check"></i> Friend Request sent</a>
+                            <br>
+                            <br>
+                            <%= link_to users_cancle_request_path(@user.id), method: :post do %>
+                            <i class="fa fa-times"></i>Cancle Request
+                            <% end %>
+                            <%else%>
+                            <%= link_to users_confirm_request_path(@user.id), method: :post do %>
+                            <i class="fa fa-plus"></i>Confirm Request
+                            <% end %>
+                            <br>
+                            <br>
+                            <%= link_to users_reject_request_path(@user.id), method: :post do %>
+                            <i class="fa fa-times"></i>Reject Request
+                            <% end %>
+                            <%end%>
+                            <%end%>
+                            <%else%>
+                            <%= link_to users_add_friend_path(@user.id), method: :post do %>
+                            <i class="fa fa-plus"></i>Add Friend
+                            <% end %>
+                            <%end%>
                             <%end%>
                         </div>
                     </div>
@@ -96,24 +91,40 @@
                                     <div class="company_profile_info">
                                         <%if friend.sender_id == @user.id%>
                                         <div class="company-up-info">
-                                            <img style="height: 80px; width:80px" src="<%=profil_pic(friend.recipient)%>" alt="">
+                                            <img style="height: 80px; width:80px"
+                                                src="<%=profil_pic(friend.recipient)%>" alt="">
                                             <h3><%=friend.recipient.name%></h3>
                                             <h4><%=friend.recipient.created_at.strftime("%D")%></h4>
                                         </div>
-                                        <a href="<%= profile_path(friend.recipient.id)%>" title="" class="view-more-pro">View Profile</a>
+                                        <a href="<%= profile_path(friend.recipient.id)%>" title=""
+                                            class="view-more-pro">View Profile</a>
                                         <%end%>
                                         <%if friend.recipient_id == @user.id%>
                                         <div class="company-up-info">
-                                            <img style="height: 80px; width:80px" src="<%=profil_pic(friend.sender)%>" alt="">
+                                            <img style="height: 80px; width:80px" src="<%=profil_pic(friend.sender)%>"
+                                                alt="">
                                             <h3><%=friend.sender.name%></h3>
                                             <h4><%=friend.sender.created_at.strftime("%D")%></h4>
                                         </div>
-                                        <a href="<%= profile_path(friend.sender.id)%>" title="" class="view-more-pro">View Profile</a>
+                                        <a href="<%= profile_path(friend.sender.id)%>" title=""
+                                            class="view-more-pro">View Profile</a>
                                         <%end%>
                                     </div>
                                     <!--company_profile_info end-->
                                 </div>
                                 <%end%>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="company-title">
+                            <h3> Postes</h3>
+                        </div>
+                        <div class="companies-list">
+                            <div class="posts-section">
+                                <%= render @posts %>
+                                <!--posty end-->
+                                <!--process-comm end-->
                             </div>
                         </div>
                     </div>

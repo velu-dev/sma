@@ -1,16 +1,23 @@
-<div class="post-bar">
-    <%@notifications.map do |noti|%>
-    <div class="post_topbar">
-        <div class="usy-dt">
-            <img style="height: 50px;width: 50px" src="<%=profil_pic(noti.sentby)%>" alt="">
-            <div class="usy-name">
-                <h3><%=noti.sentby.name%></h3>
-                <span><img src="http://gambolthemes.net/workwise_demo/HTML/images/clock.png" alt="">3 min ago</span>
-                <p>
-                    <%=notify(noti)%>
-                </p>
-            </div>
-        </div>
+<div class="nott-list">
+  <%@notifications.map do |noti|%>
+    <div onclick="notifyStatus(<%=noti.id%>)" class="<%=is_read(noti)%> notfication-details">
+      <div class="noty-user-img">
+        <img style="height: 30px;width: 30px" src="<%=profil_pic(noti.sentby)%>" alt="">
+      </div>
+      <div class="notification-info">
+        <h3><%= raw notify(noti)%>.</h3>
+        <%byebug%>
+        <span><%=time_calculation(noti.created_at)%></span>
+      </div>
+      <!--notification-info -->
     </div>
-    <%end%>
+  <%end%>
 </div>
+<style>
+.unread{
+    background: #f8f9fa !important;
+}
+.readed{
+    background: #d6d6d6 !important
+}
+</style>

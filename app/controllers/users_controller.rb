@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   def profile
+    @posts = Post.where(user_id: params[:format])
+    @current_userliked_post = Like.where(user_id: current_user.id).pluck(:post_id) if current_user.present?
     @user = User.find(params[:format])
     @friendlist = Friendlist.where(sender_id: @user.id).or(Friendlist.where(recipient_id: @user.id))
     # @is_requested = @friendlist.pluck(:recipient_id).include?(current_user.id) || @friendlist.pluck(:sender_id).include?(current_user.id)
@@ -42,6 +44,7 @@ class UsersController < ApplicationController
     sender_id = current_user.id
     friendlist = Friendlist.new(sender_id: sender_id, recipient_id: recipient_id, is_accepted: false)
     if friendlist.save
+      Notification.create(sentby_id: sender_id, receivedby_id: recipient_id, notify_type_id: 1)
       flash[:notice] = "Friend Added Successfully"
       redirect_to profile_path(recipient_id)
     else
@@ -52,6 +55,7 @@ class UsersController < ApplicationController
   def confirm_request
     request = Friendlist.find_by(sender_id: params[:format], recipient_id: current_user.id)
     if request.update(is_accepted: true)
+      Notification.create(sentby_id: current_user.id, receivedby_id: params[:format], notify_type_id: 2)
       flash[:notice] = "Request Accepted"
       redirect_to profile_path(params[:format])
     else
@@ -92,6 +96,15 @@ class UsersController < ApplicationController
   end
 
   def notification
-    @notifications = Notification.where(receivedby_id: current_user.id, is_read: false)
+    @notifications = Notification.where(receivedby_id: current_user.id)
+  end
+
+  def notification_status
+    notification = Notification.find(params[:id])
+    if notification.update(is_read: params[:is_read])
+      render json: { status: true, data: notification }
+    else
+      render json: { status: false }
+    end
   end
 end

@@ -1,6 +1,18 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.order(created_at: :desc)
+    if current_user.present?
+      @friendlist = Friendlist.where(sender_id: current_user.id, is_accepted: true).or(Friendlist.where(recipient_id: current_user.id, is_accepted: true))
+      friends = @friendlist.pluck(:sender_id, :recipient_id).flatten.uniq
+      @posts = []
+      if friends.empty?
+        @posts = Post.where(user_id: current_user.id)
+      else
+        @posts = Post.where(user_id: friends)
+      end
+    else
+      @posts = Post.all.order(created_at: :desc)
+    end
+    # @posts = Post.all.order(created_at: :desc)
     @users = User.all
     @current_userliked_post = Like.where(user_id: current_user.id).pluck(:post_id) if current_user.present?
   end
