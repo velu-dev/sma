@@ -1,0 +1,152 @@
+<section class="messages-page">
+  <div class="container">
+    <div class="messages-sec">
+      <div class="row">
+        <div class="col-lg-4 col-md-12 no-pdd">
+          <div class="msgs-list">
+            <div class="msg-title">
+              <h3>Messages</h3>
+              <ul>
+                <button class="new-chat add btn btn-info">+</button>
+              </ul>
+            </div>
+            <!--msg-title end-->
+            <div class="messages-list ">
+              <ul>
+                <%@chat_rooms.map do |room|%>
+                  <a href="<%=message_path(room)%>">
+                    <li class="<%=check_active(params[:id], room.id)%>">
+                      <div class="usr-msg-details">
+                        <div class="usr-ms-img">
+                          <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/m-img1.png"
+												alt="">
+                          <span class="msg-status"></span>
+                        </div>
+                        <div class="usr-mg-info">
+                          <h3><%= chat_room_name(room)%></h3>
+                          <p> <%= chat_room_description(room) %> <img
+													src="http://gambolthemes.net/workwise_demo/HTML/images/smley.png"
+													alt=""></p>
+                          </div>
+                          <!--usr-mg-info end-->
+                          <span class="posted_time"><%=room.created_at.strftime("%H %M %a")%></span>
+                          <!-- <span class="msg-notifc">1</span> -->
+                        </div>
+                        <!--usr-msg-details end-->
+                      </li>
+                    </a>
+                  <%end%>
+                </ul>
+              </div>
+              <!--messages-list end-->
+            </div>
+            <!--msgs-list end-->
+          </div>
+          <div class="col-lg-8 col-md-12 pd-right-none pd-left-none">
+            <div class="main-conversation-box">
+              <div class="message-bar-head">
+                <div class="usr-msg-details">
+                  <div class="usr-ms-img">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/m-img1.png" alt="">
+                  </div>
+                  <div class="usr-mg-info">
+                    <h3><%=chat_room_name(@group)%></h3>
+                  </div>
+                  <!--usr-mg-info end-->
+                </div>
+                <a title=""><i class="fa fa-ellipsis-v"></i></a>
+              </div>
+              <div class="messages-line mCustomScrollbar _mCS_1">
+                <%if params[:id].present?%>
+                  <%= render partial: "messages/message"%>
+                <%end%>
+              </div>
+              <div class="message-send-area">
+                <form>
+                  <div class="mf-field">
+                    <input type="text" name="message" placeholder="Type a message here">
+                    <button type="submit">Send</button>
+                  </div>
+                  <ul>
+                    <li><a href="#" title=""><i class="fa fa-smile-o"></i></a></li>
+                    <li><a href="#" title=""><i class="fa fa-camera"></i></a></li>
+                    <li><a href="#" title=""><i class="fa fa-paperclip"></i></a></li>
+                  </ul>
+                </form>
+              </div>
+              <!--message-send-area end-->
+            </div>
+            <!--main-conversation-box end-->
+          </div>
+        </div>
+      </div>
+      <!--messages-sec end-->
+    </div>
+  </section>
+  <div class="post-popup grp-pj">
+    <div class="post-project">
+      <h3>Create Post</h3>
+      <div class="post-project-fields">
+        <%= form_tag({:action => 'create', :controller=> "chat_rooms"},remote: true, multipart: true) do |form| %>
+          <div class="row">
+            <div class="col-lg-12">
+              <select class="form-control" name="chat_room[is_group]">
+                <option>Select Category</option>
+                <option value="1">Group</option>
+                <option value="0">Personal</option>
+              </select>
+            </div>
+            <div class="col-lg-12">
+              <select class="form-control" name="chat_room[is_private]">
+                <option>Select Privacy</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <div class="col-lg-12">
+              <input type="text" class="form-control" name="chat_room[room_name]" placeholder="Chat Room name" />
+            </div>
+            <div class="col-lg-12">
+              <%= select_tag "chat_room[second_user_id]", options_from_collection_for_select(User.all, "id", "name", "1"), class: "form-control"%>
+            </div>
+            <div class="col-lg-12">
+              <ul>
+                <li><button class="active" type="submit" value="post">Post</button></li>
+                <!-- <li><a href="#" title="">Cancel</a></li> -->
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <!--post-project-fields end-->
+      <a title=""><i class="la la-times-circle-o"></i></a>
+    </div>
+    <!--post-project end-->
+  </div>
+  <script>
+    $(".new-chat").on("click", function () {
+    	$(".post-popup.grp-pj").addClass("active");
+    	//    $(".wrapper").addClass("overlay");
+    	return false;
+    });
+    $(".post-project > a").on("click", function () {
+    	$(".post-popup.grp-pj").removeClass("active");
+    	$(".wrapper").removeClass("overlay");
+    	return false;
+    });
+  </script>
+  <style>
+    .post-project>a {
+    	top: 17px !important;
+    	right: 7px !important;
+    }
+    
+    .post-project h3 {
+    	background: #17a1b8 !important;
+    }
+    
+    .message-list>ul {
+    	overflow-y: scroll;
+    	height: 616px;
+    }
+  </style>

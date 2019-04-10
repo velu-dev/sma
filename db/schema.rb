@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_120853) do
+ActiveRecord::Schema.define(version: 2019_04_10_102219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chat_rooms", force: :cascade do |t|
+    t.string "room_name"
+    t.bigint "user_id"
+    t.bigint "first_user_id"
+    t.bigint "second_user_id"
+    t.boolean "is_group"
+    t.boolean "is_private"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["first_user_id"], name: "index_chat_rooms_on_first_user_id"
+    t.index ["second_user_id"], name: "index_chat_rooms_on_second_user_id"
+    t.index ["user_id"], name: "index_chat_rooms_on_user_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "comment"
@@ -101,6 +115,9 @@ ActiveRecord::Schema.define(version: 2019_04_05_120853) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "chat_rooms", "users"
+  add_foreign_key "chat_rooms", "users", column: "first_user_id"
+  add_foreign_key "chat_rooms", "users", column: "second_user_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "friendlists", "users", column: "recipient_id"

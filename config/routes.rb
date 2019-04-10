@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # get 'messages/index'
   get "errors/not_found"
   get "profile", to: "users#profile"
   get "edit", to: "users#edit"
@@ -22,7 +23,9 @@ Rails.application.routes.draw do
   post "posts/like"
   get "posts/post_filter/:id", to: "posts#post_filter", as: "post_filter"
   resources :posts
+  resources :chat_rooms
   resources :comments
+  resources :messages
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#unacceptable"
   get "/500", to: "errors#server_error"
