@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # get 'messages/index'
-  get "errors/not_found"
+  # get "errors/not_found"
   get "profile", to: "users#profile"
   get "edit", to: "users#edit"
   post "users/update"
@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "users/confirm_request"
   post "users/cancle_request"
   post "users/reject_request"
+  post "users/profile_update"
   post "users/delete_friend"
   get "users/notification"
   post "users/notification_status"
@@ -21,14 +22,16 @@ Rails.application.routes.draw do
   get "comments/comments_count"
   # delete "comments/:id", to: "comments#destroy", as: "comments"
   post "posts/like"
+  post "posts/post_media"
+  post "posts/delete_media"
   get "posts/post_filter/:id", to: "posts#post_filter", as: "post_filter"
   resources :posts
   resources :chat_rooms
   resources :comments
   resources :messages
-  get "/404", to: "errors#not_found"
-  get "/422", to: "errors#unacceptable"
-  get "/500", to: "errors#server_error"
+  # get "/404", to: "errors#not_found"
+  # get "/422", to: "errors#unacceptable"
+  # get "/500", to: "errors#server_error"
   # get "posts/:id", to: "posts#show", as: "posts"
   # delete "posts/:id", to: "posts#destroy", as: "posts"
   # post "posts/create"

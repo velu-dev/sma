@@ -11,4 +11,4 @@ Rails.application.config.assets.paths << Rails.root.join("node_modules")
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-Rails.application.config.assets.precompile += %w( animate.css bootstrap.min.css line-awesome.css line-awesome-font-awesome.min.css font-awesome.min.css jquery.mCustomScrollbar.min.css slick.css slick-theme.css style.css responsive.css jquery.min.js popper.js bootstrap.min.js jquery.mCustomScrollbar.js slick.min.js scrollbar.js script.js )
+Rails.application.config.assets.precompile += %w( animate.css bootstrap.min.css line-awesome.css line-awesome-font-awesome.min.css font-awesome.min.css jquery.mCustomScrollbar.min.css slick.css slick-theme.css style.css responsive.css lightslider.min.css jquery.min.js popper.js bootstrap.min.js jquery.mCustomScrollbar.js slick.min.js scrollbar.js script.js isInViewport.js lightslider.min.js )

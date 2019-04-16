@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: socialmediaapp_production
-  username: socialmediaapp
+  username: wamds
   password: <%= ENV['SOCIALMEDIAAPP_DATABASE_PASSWORD'] %>

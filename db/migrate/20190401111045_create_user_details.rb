@@ -3,6 +3,8 @@ class CreateUserDetails < ActiveRecord::Migration[5.2]
     create_table :user_details do |t|
       t.references :user, foreign_key: true
       t.string :profile_pic
+      t.string :cover_pic
+      t.string :about
       t.string :designation
       t.string :location
 

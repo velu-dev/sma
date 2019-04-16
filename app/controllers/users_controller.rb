@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def profile
-    @posts = Post.where(user_id: params[:format])
+    @posts = Post.where(user_id: params[:format]).order(created_at: :desc)
     @current_userliked_post = Like.where(user_id: current_user.id).pluck(:post_id) if current_user.present?
     @user = User.find(params[:format])
     @friendlist = Friendlist.where(sender_id: @user.id).or(Friendlist.where(recipient_id: @user.id))
@@ -28,9 +28,9 @@ class UsersController < ApplicationController
   def update
     user_detail = UserDetail.find_by_user_id(current_user.id)
     if user_detail.present?
-      user = user_detail.update(profile_pic: params[:profile_pic], location: params[:location], designation: params[:designation])
+      user = user_detail.update(profile_pic: params[:profile_pic], location: params[:location], designation: params[:designation], about: params[:about])
     else
-      user = UserDetail.create!(user_id: current_user.id, profile_pic: params[:profile_pic], location: params[:location], designation: params[:designation])
+      user = UserDetail.create!(user_id: current_user.id, profile_pic: params[:profile_pic], location: params[:location], designation: params[:designation], about: params[:about])
     end
     if user
       redirect_to profile_path(current_user.id)
@@ -85,7 +85,6 @@ class UsersController < ApplicationController
 
   def delete_friend
     ids = [params[:format], current_user.id]
-    byebug
     friend = Friendlist.where(sender_id: ids).find_by(recipient_id: ids)
     if friend.destroy
       flash[:notice] = "Unfriend Successfull"
@@ -103,6 +102,15 @@ class UsersController < ApplicationController
     notification = Notification.find(params[:id])
     if notification.update(is_read: params[:is_read])
       render json: { status: true, data: notification }
+    else
+      render json: { status: false }
+    end
+  end
+
+  def profile_update
+    user = User.find(params[:user_id]).user_detail
+    if user.update("profile_pic": params[:profile_pic], cover_pic: params[:cover_pic])
+      render json: { status: true, data: user }
     else
       render json: { status: false }
     end

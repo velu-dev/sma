@@ -28,13 +28,13 @@
               <!--user-profile end-->
               <ul class="user-fw-status">
                 <!--  <li>
-                    <h4>Following</h4>
-                    <span>34</span>
-                  </li>
-                  <li>
-                    <h4>Followers</h4>
-                    <span>155</span>
-                  </li-->
+                      <h4>Following</h4>
+                      <span>34</span>
+                    </li>
+                    <li>
+                      <h4>Followers</h4>
+                      <span>155</span>
+                    </li-->
                 <li>
                   <a href="<%= profile_path(current_user.id)%>" title="">View Profile</a>
                 </li>
@@ -43,64 +43,64 @@
             <%end%>
             <!--user-data end-->
             <!--div class="suggestions full-width">
-              <div class="sd-title">
-                <h3>Suggestions</h3>
-                <i class="la la-ellipsis-v"></i>
-              </div>
-              <div class="suggestions-list">
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s1.png" alt="">
-                  <div class="sgt-text">
-                    <h4>Jessica William</h4>
-                    <span>Graphic Designer</span>
+                <div class="sd-title">
+                  <h3>Suggestions</h3>
+                  <i class="la la-ellipsis-v"></i>
+                </div>
+                <div class="suggestions-list">
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s1.png" alt="">
+                    <div class="sgt-text">
+                      <h4>Jessica William</h4>
+                      <span>Graphic Designer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s2.png" alt="">
-                  <div class="sgt-text">
-                    <h4>John Doe</h4>
-                    <span>PHP Developer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s2.png" alt="">
+                    <div class="sgt-text">
+                      <h4>John Doe</h4>
+                      <span>PHP Developer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s3.png" alt="">
-                  <div class="sgt-text">
-                    <h4>Poonam</h4>
-                    <span>Wordpress Developer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s3.png" alt="">
+                    <div class="sgt-text">
+                      <h4>Poonam</h4>
+                      <span>Wordpress Developer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s4.png" alt="">
-                  <div class="sgt-text">
-                    <h4>Bill Gates</h4>
-                    <span>C & C++ Developer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s4.png" alt="">
+                    <div class="sgt-text">
+                      <h4>Bill Gates</h4>
+                      <span>C & C++ Developer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s5.png" alt="">
-                  <div class="sgt-text">
-                    <h4>Jessica William</h4>
-                    <span>Graphic Designer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s5.png" alt="">
+                    <div class="sgt-text">
+                      <h4>Jessica William</h4>
+                      <span>Graphic Designer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s6.png" alt="">
-                  <div class="sgt-text">
-                    <h4>John Doe</h4>
-                    <span>PHP Developer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s6.png" alt="">
+                    <div class="sgt-text">
+                      <h4>John Doe</h4>
+                      <span>PHP Developer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
+                  <div class="view-more">
+                    <a  title="">View More</a>
+                  </div>
                 </div>
-                <div class="view-more">
-                  <a href="#" title="">View More</a>
-                </div>
-              </div>
-            </div-->
+              </div-->
             <!--suggestions end-->
             <!--tags-sec end-->
           </div>
@@ -110,15 +110,97 @@
           <div class="main-ws-sec">
             <%if current_user.present? %>
             <div class="post-topbar">
-              <div class="user-picy">
-                <img style="height: 50px;width: 50px; border-radius: 50%;"
-                  src="<%= profil_pic(current_user)%>" alt="">
-              </div>
-              <div class="post-st">
-                <ul>
-                  <li><a class="post_project active" title="">Post </a></li>
-                  <!-- <li><a class="post-jb active" href="#" title="">Post a Job</a></li> -->
-                </ul>
+              <!--div class="user-picy">
+                        <img style="height: 50px;width: 50px; border-radius: 50%;"
+                    src="<%#= profil_pic(current_user)%>" alt="">
+                      </div>
+                      <div class="post-st">
+                        <ul>
+                          <li><a class="post_project active" title="">Post </a></li>
+                          
+                        </ul>
+                      </div-->
+              <div class="post-project">
+                
+                <div class="post-project-fields">
+                  <%#= form_tag({:action => 'create'},remote: true, :id => "post_form", multipart: true) do %>
+                  <div class="row form">
+                    <div class="col-lg-12">
+                      <textarea id="content" name="content" placeholder="Type your Query here" required></textarea>
+                    </div>
+                    <div class="col-lg-12">
+                    <label>Enter your Tags</label>
+                      <input id="tags" type="text" class="form-control" name="tags" placeholder="html,css,js" />
+                    </div>
+                    <div class="col-lg-12">
+                    <div class="row">
+                        
+                        <input id="location" type="text" class="col-lg-8 form-control" name="location" disabled placeholder="Click left button" />
+                          <a class="col-lg-4 location btn btn-success" onclick="getLocation()">Get Location</a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-lg-12">
+                    <div class="tab-feed">  
+                        <ul>
+                          <li data-tab="feed-dd" class="active">
+                            <a onclick="uploadFile('image')" title="">
+                              <img class="upload_icon" src="img/image_icon.png" alt="">
+                              <span>Image</span>
+                            </a>
+                          </li>
+                          <li data-tab="info-dd">
+                            <a onclick="uploadFile('video')" title="">
+                              <img class="upload_icon" src="img/video_icon.png" alt="">
+                              <span>Video</span>
+                            </a>
+                          </li>
+                          <li data-tab="portfolio-dd">
+                            <a onclick="uploadFile('audio')" title="">
+                              <img class="upload_icon" src="img/audio_icon.png" alt="">
+                              <span>Audio</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <style>
+                      .upload_icon{
+                        height: 50px;
+                        width: 50px;
+                      }
+                      </style>
+                        <div style="display: none">
+                          <%= file_field_tag "medias", {:onchange => "readURL(this);",:multiple => true,:accept => 'image/*',class:"form-control", id: "image_upload" } %>
+                          <%= file_field_tag "medias",{:onchange => "readURL(this);",:multiple => true,class:"form-control", id: "video_upload", :accept => 'video/*'  } %>
+                          <%= file_field_tag "medias", {:onchange => "readURL(this);",:multiple => true,class:"form-control", id: "audio_upload",:accept => 'audio/*' } %>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="row">
+                        <%# <img id="" class="col-lg-6 disable_media_vid animated fadeIn" alt="your image" />
+                      <video class="col-lg-6 disable_media_vid animated fadeIn" controls id="vid_prev">
+                        <source src="#" type="video/mp4">
+                      </video>
+                      <audio  id="aud_prev" class="col-lg-6 disable_media animated fadeIn" controls>
+                        <source>
+                        Your browser does not support the audio element.
+                      </audio>
+                      <br> %>
+                        <div style="display: none" class="galary col-lg-12 row">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <ul>
+                        <li><button class="active" onclick="post()">Post</button></li>
+                        <!-- <li><a  title="">Cancel</a></li> -->
+                      </ul>
+                    </div>
+                  </div>
+                  <%# end %>
+                </div>
+                <!--post-project-fields end-->
+                <a title=""><i class="la la-times-circle-o"></i></a>
               </div>
               <!--post-st end-->
             </div>
@@ -169,64 +251,64 @@
             <%end%>
             <!--widget-about end-->
             <!--div class="widget suggestions full-width">
-              <div class="sd-title">
-                <h3>Most Viewed People</h3>
-                <i class="la la-ellipsis-v"></i>
-              </div>
-              <div class="suggestions-list">
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s1.png" alt="">
-                  <div class="sgt-text">
-                    <h4>Jessica William</h4>
-                    <span>Graphic Designer</span>
+                <div class="sd-title">
+                  <h3>Most Viewed People</h3>
+                  <i class="la la-ellipsis-v"></i>
+                </div>
+                <div class="suggestions-list">
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s1.png" alt="">
+                    <div class="sgt-text">
+                      <h4>Jessica William</h4>
+                      <span>Graphic Designer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s2.png" alt="">
-                  <div class="sgt-text">
-                    <h4>John Doe</h4>
-                    <span>PHP Developer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s2.png" alt="">
+                    <div class="sgt-text">
+                      <h4>John Doe</h4>
+                      <span>PHP Developer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s3.png" alt="">
-                  <div class="sgt-text">
-                    <h4>Poonam</h4>
-                    <span>Wordpress Developer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s3.png" alt="">
+                    <div class="sgt-text">
+                      <h4>Poonam</h4>
+                      <span>Wordpress Developer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s4.png" alt="">
-                  <div class="sgt-text">
-                    <h4>Bill Gates</h4>
-                    <span>C &amp; C++ Developer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s4.png" alt="">
+                    <div class="sgt-text">
+                      <h4>Bill Gates</h4>
+                      <span>C &amp; C++ Developer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s5.png" alt="">
-                  <div class="sgt-text">
-                    <h4>Jessica William</h4>
-                    <span>Graphic Designer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s5.png" alt="">
+                    <div class="sgt-text">
+                      <h4>Jessica William</h4>
+                      <span>Graphic Designer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
-                </div>
-                <div class="suggestion-usd">
-                  <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s6.png" alt="">
-                  <div class="sgt-text">
-                    <h4>John Doe</h4>
-                    <span>PHP Developer</span>
+                  <div class="suggestion-usd">
+                    <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/s6.png" alt="">
+                    <div class="sgt-text">
+                      <h4>John Doe</h4>
+                      <span>PHP Developer</span>
+                    </div>
+                    <span><i class="la la-plus"></i></span>
                   </div>
-                  <span><i class="la la-plus"></i></span>
+                  <div class="view-more">
+                    <a  title="">View More</a>
+                  </div>
                 </div>
-                <div class="view-more">
-                  <a href="#" title="">View More</a>
-                </div>
-              </div>
-            </div-->
+              </div-->
           </div>
           <!--right-sidebar end-->
         </div>
@@ -236,84 +318,6 @@
   </div>
 </div>
 <div class="post-popup pst-pj">
-  <div class="post-project">
-    <h3>Create Post</h3>
-    <div class="post-project-fields">
-      <%= form_tag({:action => 'create'},remote: true, multipart: true) do %>
-      <div class="row">
-        <div class="col-lg-12">
-          <textarea name="content" placeholder="Type your Query here" required></textarea>
-        </div>
-        <div class="col-lg-12">
-          <input type="text" class="form-control" name="tags" placeholder="red,green,blue" />
-        </div>
-        <div class="col-lg-6">
-          <%= file_field_tag "media", {:onchange => "readURL(this);" } %>
-          <%# <input type="file" name="media" onchange="readURL(this);" placeholder="Select Media"> %>
-        </div>
-        <div class="col-lg-6">
-          <input type="hidden" name="media_type" id="media_type">
-        </div>
-        <div class="col-lg-12">
-          <img id="img_prev" class="disable_media_img animated fadeIn" src="#" alt="your image" />
-          <video class="disable_media_vid animated fadeIn" controls id="vid_prev">
-            <source src="#" type="video/mp4">
-          </video>
-        </div>
-        <div class="col-lg-12">
-          <ul>
-            <li><button class="active" type="submit" value="post">Post</button></li>
-            <!-- <li><a href="#" title="">Cancel</a></li> -->
-          </ul>
-        </div>
-      </div>
-      <% end %>
-    </div>
-    <!--post-project-fields end-->
-    <a title=""><i class="la la-times-circle-o"></i></a>
-  </div>
   <!--post-project end-->
 </div>
 <!--post-project-popup end-->
-<style>
-  .disable_media_img,
-  .disable_media_vid {
-    display: none;
-  }
-
-  .enable_media,
-  .enable_comments {
-    display: block;
-  }
-</style>
-<script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      $("#media_type").val(input.files[0].type.split('/')[0]);
-      console.log(input.files[0].type.split('/'))
-      if (input.files[0].type.split('/')[0] == "image") {
-        id = "#img_prev"
-        $("#img_prev").removeClass("disable_media_img");
-        $("#img_prev").addClass("enable_media");
-        $("#vid_prev").addClass("disable_media_vid");
-        $("#vid_prev").removeClass("enable_media");
-
-      } else if (input.files[0].type.split('/')[0] == "video") {
-        id = "#vid_prev"
-        $("#vid_prev").removeClass("disable_media_vid");
-        $("#vid_prev").addClass("enable_media");
-        $("#img_prev").addClass("disable_media_img");
-        $("#img_prev").removeClass("enable_media");
-      }
-      reader.onload = function (e) {
-        $(id)
-          .attr('src', e.target.result)
-          .width(250)
-          .height(250);
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-</script>

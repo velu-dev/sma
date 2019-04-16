@@ -8,6 +8,7 @@
                     <div class="acc-setting">
                         <p id="notice"><%= notice %></p>
                         <h3 class="align-center">Login</h3>
+                        <a href="<%=profile_path(@user.id)%>" class="btn btn-danger">Back</a>
                         <%= form_tag({:action => 'update'}, multipart: true) do %>
                         <div class="cp-field">
                             <h5>Name</h5>
@@ -38,6 +39,18 @@
                   </div>
                 </div> -->
                         <div class="cp-field">
+                            <h5>About me</h5>
+                            <div class="cpp-fiel">
+                            <%if @user.user_detail.present?%>
+                                <textarea name="about" placeholder="About Me"><%= @user.user_detail.about%></textarea>
+                            <%else%>
+                            <textarea name="about" placeholder="About Me" required></textarea>
+                            <%end%>
+                                
+                                <i class="fa fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="cp-field">
                             <h5>Designation</h5>
                             <div class="cpp-fiel">
                             <%if @user.user_detail.present?%>
@@ -58,14 +71,6 @@
                             <%end%>
                                 
                                 <i class="fa fa-map-marker"></i>
-                            </div>
-                        </div>
-                        <div class="cp-field">
-                            <h5>Profile Picture</h5>
-                            <div class="cpp-fiel">
-                                    <%= file_field_tag "profile_pic" %>
-                                
-                                <i class="fa fa-picture-o"></i>
                             </div>
                         </div>
                         <div class="save-stngs pd2">

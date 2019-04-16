@@ -1,7 +1,7 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.disabled-comments{
+.disabled-comments, .disable-content{
     display: none;
 }
 .media_display{
@@ -16,4 +16,55 @@
 	border-right: 1px solid #e4e4e4;
 	border-bottom: 1px solid #e4e4e4;
 	margin-bottom: 20px !important;
+}
+.galary{
+	overflow-x: scroll;
+	height: 200px;
+}
+.disable_media_img,
+.disable_media_vid,
+.disable_media {
+  display: none;
+}
+
+.enable_media,
+.enable-content,
+.enable_comments {
+  display: block;
+}
+
+.galary {
+  display: none;
+}
+
+.imageThumb {
+  max-height: 75px;
+  min-height: 75px;
+  max-width: 150px;
+  min-width: 150px;
+  border: 2px solid;
+  padding: 1px;
+  cursor: pointer;
+}
+
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+
+.remove {
+  display: block;
+  background: #444;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+.remove:hover {
+  background: white;
+  color: black;
+}
+.location {
+  height: 40px;
 }

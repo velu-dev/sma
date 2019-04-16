@@ -154,8 +154,8 @@ nav ul li a,
 .sign_link > a,
 .post-popup,
 .post-project > a,
-.post-project-fields form ul li button,
-.post-project-fields form ul li a,
+.post-project-fields .form ul li button,
+.post-project-fields .form ul li a,
 .sign-control li a,
 .cover-sec > a,
 .star-descp > a,
@@ -194,11 +194,11 @@ nav ul li:hover > ul {
 .user-profy ul li a,
 .posty,
 .comment_box form button,
-.post-project-fields form input,
-.post-project-fields form textarea,
-.post-project-fields form select,
-.post-project-fields form ul li button,
-.post-project-fields form ul li a,
+.post-project-fields .form input,
+.post-project-fields .form textarea,
+.post-project-fields .form select,
+.post-project-fields .form ul li button,
+.post-project-fields .form ul li a,
 .signin-pop,
 .sign-control,
 .sign_in_sec form input,
@@ -1836,21 +1836,21 @@ main {
 	padding: 30px 20px;
 	background-color: #fff;
 }
-.post-project-fields form {
+.post-project-fields .form {
 	float: left;
 	width: 100%;
 }
-.post-project-fields form input {
+.post-project-fields .form input {
 	padding: 0 15px;
 	height: 40px;
 }
-.post-project-fields form textarea {
+.post-project-fields .form textarea {
 	padding: 15px;
 	height: 130px;
 }
-.post-project-fields form input,
-.post-project-fields form textarea,
-.post-project-fields form select {
+.post-project-fields .form input,
+.post-project-fields .form textarea,
+.post-project-fields .form select {
 	width: 100%;
 	color: #b2b2b2;
 	font-size: 14px;
@@ -1858,25 +1858,25 @@ main {
 	margin-bottom: 20px;
 	font-weight: 500;
 }
-.post-project-fields form select {
+.post-project-fields .form select {
 	height: 40px;
 	padding: 0 10px;
 }
-.post-project-fields form ul {
+.post-project-fields .form ul {
 	float: left;
 	margin-top: 10px;
 	width: 100%;
 }
-.post-project-fields form ul li {
+.post-project-fields .form ul li {
 	display: inline-block;
 	margin-right: 15px;
 }
-.post-project-fields form ul li button.active {
+.post-project-fields .form ul li button.active {
 	background-color: #e44d3a;
 	color: #fff;
 }
-.post-project-fields form ul li button,
-.post-project-fields form ul li a {
+.post-project-fields .form ul li button,
+.post-project-fields .form ul li a {
 	color: #000000;
 	font-size: 16px;
 	border: 1px solid #e5e5e5;
@@ -1886,8 +1886,8 @@ main {
 	font-weight: 600;
 	cursor: pointer;
 }
-.post-project-fields form ul li button:hover,
-.post-project-fields form ul li a:hover {
+.post-project-fields .form ul li button:hover,
+.post-project-fields .form ul li a:hover {
 	background-color: #e44d3a;
 	color: #fff;
 } 

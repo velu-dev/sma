@@ -1,9 +1,25 @@
 module UsersHelper
   def profil_pic(user)
     if user.user_detail.present?
-      return user.user_detail.profile_pic.url
+      if user.user_detail.profile_pic.present?
+        return user.user_detail.profile_pic.url
+      else
+        return "/profile_pic/user.png"
+      end
     else
       return "/profile_pic/user.png"
+    end
+  end
+
+  def cover_pic(user)
+    if user.user_detail.present?
+      if user.user_detail.cover_pic.present?
+        return user.user_detail.cover_pic.url
+      else
+        return "http://gambolthemes.net/workwise_demo/HTML/images/resources/cover-img.jpg"
+      end
+    else
+      return "http://gambolthemes.net/workwise_demo/HTML/images/resources/cover-img.jpg"
     end
   end
 
@@ -13,6 +29,7 @@ module UsersHelper
     elsif content.notify_type_id == 2
       "<a href='#{profile_path(content.sentby.id)}' title=''>#{content.sentby.name} </a> accepted your Request."
     elsif content.notify_type_id == 3
+      byebug
       "<a href='#{"http://0.0.0.0:3000/posts#" + (content.post.id).to_s}' title=''>#{content.sentby.name} </a> posted new post."
     elsif content.notify_type_id == 4
       "A post liked #{content.sentby.name}"

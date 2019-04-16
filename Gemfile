@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'popper_js'
  gem 'bootstrap', '~> 4.3.1'
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+ gem 'mini_magick', '~> 4.8'
 gem 'client_side_validations'
 gem 'carrierwave'
 # Use Capistrano for deployment

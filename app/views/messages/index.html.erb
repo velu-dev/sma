@@ -50,7 +50,9 @@
                     <img src="http://gambolthemes.net/workwise_demo/HTML/images/resources/m-img1.png" alt="">
                   </div>
                   <div class="usr-mg-info">
+                    <%if @group.present?%>
                     <h3><%=chat_room_name(@group)%></h3>
+                    <%end%>
                   </div>
                   <!--usr-mg-info end-->
                 </div>

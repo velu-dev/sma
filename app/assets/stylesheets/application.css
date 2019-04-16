@@ -36,3 +36,9 @@ a{
 .comment_box button{
     margin-left: 10px;
 }
+.media_display{
+    margin-bottom: 10px;
+}
+.like_count{
+    margin-left: 0px!important;
+    }

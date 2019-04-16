@@ -5,9 +5,9 @@ class PostsController < ApplicationController
       friends = @friendlist.pluck(:sender_id, :recipient_id).flatten.uniq
       @posts = []
       if friends.empty?
-        @posts = Post.where(user_id: current_user.id)
+        @posts = Post.where(user_id: current_user.id).order(created_at: :desc)
       else
-        @posts = Post.where(user_id: friends)
+        @posts = Post.where(user_id: friends).order(created_at: :desc)
       end
     else
       @posts = Post.all.order(created_at: :desc)
@@ -35,17 +35,37 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def post_media
+    post_media = PostMedium.new(media_type: params[:media].content_type, media: params[:media])
+    if post_media.save
+      render json: { status: true, data: post_media }
+    else
+      render json: { status: false }
+    end
+  end
+
+  def delete_media
+    post_media = PostMedium.find(params[:id])
+    if post_media.destroy
+      render json: { status: true }
+    else
+      render json: { status: false }
+    end
+  end
+
   def post_filter
-    @posts = Post.where(" '#{params[:id]}' = ANY (tags)")
+    @posts = Post.where(" '#{params[:id]}' = ANY (tags)").order(created_at: :desc)
     @users = User.all
     @current_userliked_post = Like.where(user_id: current_user.id).pluck(:post_id) if current_user.present?
     render "index"
   end
 
   def create
-    post = Post.new(content: params[:content], media: params[:media], media_type: params[:media_type], user_id: current_user.id, tags: params[:tags].split(", "))
-
+    post = Post.new(location: params[:location], content: params[:content], user_id: current_user.id, tags: params[:tags].split(","))
     if post.save
+      params[:media].map do |media|
+        PostMedium.create(media_type: media.content_type, post_id: post.id, media: media)
+      end
       @friendlist = Friendlist.where(sender_id: current_user.id, is_accepted: true).or(Friendlist.where(recipient_id: current_user.id, is_accepted: true))
       @friendlist.map do |friend|
         notify_to = current_user.id != friend.sender_id ? friend.sender_id : friend.recipient_id

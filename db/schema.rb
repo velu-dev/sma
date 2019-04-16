@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_10_102219) do
+ActiveRecord::Schema.define(version: 2019_04_11_085743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,11 +83,19 @@ ActiveRecord::Schema.define(version: 2019_04_10_102219) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "content"
+  create_table "post_media", force: :cascade do |t|
     t.string "media"
     t.string "media_type"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_media_on_post_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "content"
     t.string "tags", array: true
+    t.string "location"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -98,6 +106,8 @@ ActiveRecord::Schema.define(version: 2019_04_10_102219) do
   create_table "user_details", force: :cascade do |t|
     t.bigint "user_id"
     t.string "profile_pic"
+    t.string "cover_pic"
+    t.string "about"
     t.string "designation"
     t.string "location"
     t.datetime "created_at", null: false
@@ -126,6 +136,7 @@ ActiveRecord::Schema.define(version: 2019_04_10_102219) do
   add_foreign_key "likes", "users"
   add_foreign_key "notifications", "users", column: "receivedby_id"
   add_foreign_key "notifications", "users", column: "sentby_id"
+  add_foreign_key "post_media", "posts"
   add_foreign_key "posts", "users"
   add_foreign_key "user_details", "users"
 end

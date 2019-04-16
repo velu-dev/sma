@@ -20,11 +20,7 @@
         <div class="epi-sec">
             <ul class="descp">
                 <li><img src="http://gambolthemes.net/workwise_demo/HTML/images/icon9.png" alt=""><span>
-                <% if current_user.present? %>
-                        <%if post.user.user_detail.present?%>
-                        <%=post.user.user_detail.location%>
-                        <%end%>
-                        <%end%>
+                        <%=post.location%>
                         </span></li>
             </ul>
         </div>
@@ -32,20 +28,88 @@
             <%if post.user.user_detail.present?%>
             <h3><%=post.user.user_detail.designation%></h3>
             <%end%>
-            <p><%= post.content%>
-                <!-- <a href="#" title="">view more</a> -->
-            </p>
+            <%=raw post_content_helper(post)%>
+            <script>
+              $("#expand-content<%=post.id%>").click(function(){
+                      $("#flex-content<%=post.id%>").addClass("disable-content");
+                      $("#full-content<%=post.id%>").removeClass("disable-content");
+                      $("#full-content<%=post.id%>").addClass("enable_content");
+                });
+                $("#close-content<%=post.id%>").click(function(){
+                      $("#flex-content<%=post.id%>").removeClass("disable-content");
+                      $("#flex-content<%=post.id%>").addClass("enable_content");
+                      $("#full-content<%=post.id%>").addClass("disable-content");
+                      $("#full-content<%=post.id%>").removeClass("enable_content");
+                });
+            </script>
+            <!-- Media class="col-lg-6" -->
 
-            <div class="media">
-                <%if post.media_type == 'image'%>
-                <img class="animated fadeIn media_display" src="<%=post.media.url%>" alt="your image" />
-<%end%>
-<%if post.media_type == 'video'%>
-  <video class="animated fadeIn media_display" controls>
-    <source src="<%=post.media.url%>" type="video/mp4">
-  </video>
-<%end%>
-</div>
+  <%if post.post_mediums.present?%>
+      <div class="slider-post" id="media">
+          <ul class="slider-ul" id="lightSlider<%=post.id%>">
+              <%post.post_mediums.map do |media|%>
+                  <%if media.media_type.split("/")[0] == 'image'%>
+                    <li class="thumb-img"data-thumb="<%=media.media.url%>">
+                        <img height="20%" src="<%=media.media.url%>" />
+                    </li>      
+                    <%end%>
+                    <%if media.media_type.split("/")[0] == 'video'%>
+                      <li class="thumb-img" data-thumb="/thumb/video.jpg">
+                          <video id="media<%=media.id%>" class="col-lg-12 animated fadeIn media_display" controls>
+                            <source src="<%=media.media.url%>" type="<%=media.media_type%>">
+                          </video>
+                      </li>
+                    <%end%>  
+                     <%if media.media_type.split("/")[0] == 'audio'%>
+                     <li class="thumb-img" data-thumb="/thumb/audio.png">
+                      <audio id="media<%=media.id%>"  class="col-lg-12 animated fadeIn" controls>
+                        <source src="<%=media.media.url%>" type="<%=media.media_type%>">
+                        Your browser does not support the audio element.
+                      </audio>
+                    <%end%>              
+                      
+
+                <%end%>
+          </ul>
+          <style>
+          .thumb-img img,.thumb-img video, .thumb-img audio {
+            height: 400px !important;
+            width: 100%;
+
+          }
+          .lSSlideOuter .lSPager.lSGallery img {
+            display: block;
+            height: 68px !important;
+            max-width: 78% !important;
+            }
+          .slider-post{
+            width:100%;
+                
+          }
+              .slider-ul {
+                background: #e9ecef;
+                height: 400px !important;
+                  list-style: none outside none;
+                  padding-left: 0;
+                  margin-bottom:0;
+              }
+              li {
+                  display: block;
+                  /* float: left; */
+                  margin-right: 6px;
+                  cursor:pointer;
+              }
+              .thumb-img img, video {
+                  display: block;
+                  height: auto;
+                  max-width: 100%;
+              }
+          </style>
+
+      </div>
+  <%end%>
+
+<!-- Media end-->
 <br>
 <ul class="skill-tags">
   <%post.tags.map do |tag|%>
@@ -60,18 +124,15 @@
         <%if @current_userliked_post.include?(post.id)%>
           <a  href="javascript:void(0);" onclick="likePost('<%= post.id%>','<%= current_user.id%>')" id="like<%=post.id%>"
                         class="active"><i class="la la-heart"></i> Like</a>
-          <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
-          <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
+          <span class="like-count" style="margin-left: 0px" id="like_count<%=post.id%>"><%=post.likes.count%></span>
         <%else%>
           <a  href="javascript:void(0);" onclick="likePost('<%= post.id%>','<%= current_user.id%>')" id="like<%=post.id%>"><i
                             class="la la-heart"></i> Like</a>
-          <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
-          <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
+          <span class="like-count" style="margin-left: 0px" id="like_count<%=post.id%>"><%=post.likes.count%></span>
         <%end%>
       <%else%>
         <a  href="javascript:void(0);" id="like<%=post.id%>"><i class="la la-heart"></i> Like</a>
-        <img src="http://gambolthemes.net/workwise_demo/HTML/images/liked-img.png" alt="">
-        <span id="like_count<%=post.id%>"><%=post.likes.count%></span>
+        <span class="like-count" style="margin-left: 0px" id="like_count<%=post.id%>"><%=post.likes.count%></span>
       <%end%>
     </li>
     <li onclick="openComment('<%=post.id%>')"><a  href="javascript:void(0);" title="" class="com<%=post.id%>"><img
@@ -112,3 +173,33 @@
   </div>
   <!--comment-section end-->
 </div>
+          <script>
+                 $(document).ready(function () {
+                            // setTimeout(function(){ 
+                              $('#lightSlider<%=post.id%>').lightSlider({
+                                gallery: true,
+                                item: 1,
+                                loop: true,
+                                slideMargin: 0,
+                                thumbItem: 5
+                              });
+                              // }, 3000);
+                            });
+                  </script>
+<%post.post_mediums.map do |media|%>
+                    <script>
+                            $(window).scroll(function() {
+                              document.getElementById("media").click();
+                              $('#media<%=media.id%>').each(function(){
+                                  if ($(this).is(":in-viewport( 500 )")) {
+                                    console.log("view point", this)
+                                    $(this)[0].play();
+                                    // $("#media<%=media.id%>").prop("controls",true);
+                                  } else {
+                                    $(this)[0].pause();
+                                    // $("#media<%=media.id%>").prop("controls",false);
+                                  }
+                              });
+                            });
+                        </script>
+<%end%>
