@@ -192,7 +192,6 @@
                               document.getElementById("media").click();
                               $('#media<%=media.id%>').each(function(){
                                   if ($(this).is(":in-viewport( 500 )")) {
-                                    console.log("view point", this)
                                     $(this)[0].play();
                                     // $("#media<%=media.id%>").prop("controls",true);
                                   } else {

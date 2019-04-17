@@ -208,6 +208,9 @@
             <!--post-topbar end-->
             <div class="posts-section">
               <%= render @posts %>
+              <%= will_paginate @posts %>
+<%#= will_paginate @posts, renderer: @custom_renderer %>
+
               <!--posty end-->
               <!--process-comm end-->
             </div>

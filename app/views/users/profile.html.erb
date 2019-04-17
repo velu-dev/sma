@@ -23,12 +23,45 @@
                             </div>
                         </div>
                     </div>
+                    <div class="post-popup">
+                        <div class="post-project">
+                                <div class="post-project-fields">
+                                    <div class="row form">
+                                        <div id="demo" class="col-lg-12">
+
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <ul>
+                                                <li><button class="active" id="btnCrop">btnCrop</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
                     <style>
                     .hidden{
                         display: none;
                     }
                     </style>
                     <script>
+                    $('#demo').croppie({
+
+                        // viewport options
+                        viewport: {
+                            width: 150,
+                            height: 150,
+                            type: 'circle' // or 'circle'
+                        },
+
+                        // boundary options
+                        boundary: {
+                            width: 300,
+                            height: 300
+                        },  
+                        });
+
                         document.getElementById('img_upload').onclick = function() {
                             document.getElementById('profile_pic').click();
                         };
@@ -36,29 +69,50 @@
                             document.getElementById('cover_pic').click();
                         };
                         function postfile(){
-                            user_id = "<%= current_user.id%>"
-                            profile_pic = document.getElementById("profile_pic").files[0]
-                            cover_pic = document.getElementById("cover_pic").files[0]
-                            console.log("fdsf", user_id, profile_pic, cover_pic)
-                            var formData = new FormData();
-                            formData.append("user_id", user_id);
-                            formData.append("profile_pic", profile_pic);
-                            formData.append("cover_pic", cover_pic);   
-                            var data = {user_id: user_id, profile_pic: profile_pic}
-                            $.ajax({
-                                type: 'POST',
-                                url: '/users/profile_update',
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function (res) {
-                                    if (res.data){
-                                        window.location.reload();
-                                    } else {
-                                        alert("Update User profile first")
-                                    }
+                            $(".post-popup").addClass("active")
+                                var img_reader = new FileReader();
+                                img_reader.onload = function (event) {
+                                     $('#demo').croppie('bind',{ 
+                                        url: event.target.result, 
+                                        points: [77, 469, 280, 739  ] 
+                                    });
                                 }
-                            });
+                                 img_reader.readAsDataURL(document.getElementById("profile_pic").files[0]);
+                            
+                         
+                        }
+                        $('#btnCrop').click(function() {
+                            $('#demo').croppie('result', 'canvas').then(function (img) {
+                                    upload(img, "profile");
+                                });
+                        });
+                        function upload(image, type){
+                            console.log("image", image)
+                             user_id = "<%= current_user.id%>"
+                                profile_pic = document.getElementById("profile_pic").files[0]
+                                cover_pic = document.getElementById("cover_pic").files[0]
+                                   var formData = new FormData();
+                                    formData.append("user_id", user_id);
+                                    if (type == "profile") {
+                                        formData.append("profile_pic", image)//new File([image], profile_pic.name, {lastModified: new Date()}));
+                                    } else {
+                                        formData.append("cover_pic", cover_pic);   
+                                    }
+                                    var data = {user_id: user_id, profile_pic: profile_pic}
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/users/profile_update',
+                                        data: formData,
+                                        processData: false,
+                                        contentType: false,
+                                        success: function (res) {
+                                            if (res.data){
+                                                window.location.reload();
+                                            } else {
+                                                alert("Update User profile first")
+                                            }
+                                        }
+                                    });
                         }
                         </script>
                     <!--main-left-sidebar end-->

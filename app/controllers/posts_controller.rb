@@ -5,12 +5,12 @@ class PostsController < ApplicationController
       friends = @friendlist.pluck(:sender_id, :recipient_id).flatten.uniq
       @posts = []
       if friends.empty?
-        @posts = Post.where(user_id: current_user.id).order(created_at: :desc)
+        @posts = Post.where(user_id: current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 3)
       else
-        @posts = Post.where(user_id: friends).order(created_at: :desc)
+        @posts = Post.where(user_id: friends).order(created_at: :desc).paginate(:page => params[:page], :per_page => 3)
       end
     else
-      @posts = Post.all.order(created_at: :desc)
+      @posts = Post.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 3)
     end
     # @posts = Post.all.order(created_at: :desc)
     @users = User.all
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]).paginate(:page => 1, :per_page => 2)
   end
 
   def post_media

@@ -69,7 +69,6 @@ function likePost(post_id, user_id) {
     data, data,
     url: '/posts/like',
     success: function (res) {
-      console.log(res)
       if (res.is_like) {
         $("#like" + post_id).addClass("active");
         document.getElementById('like_count' + post_id).innerHTML = res.like_count;
