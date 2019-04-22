@@ -11,9 +11,9 @@
             </div>
             <div class="ed-opts">
                 <%if current_user.present?%>
-                <%if post.user_id == current_user.id%>
-                <a title="" href="javascript:void(0);" onclick="delPost('<%=post.id%>')" class="ed-opts-open"><i class="la la-trash"></i></a>
-                <%end%> 
+                  <%if post.user_id == current_user.id%>
+                   <a title="" href="javascript:void(0);" onclick="delPost('<%=post.id%>')" class="ed-opts-open"><i class="la la-trash"></i></a>
+                  <%end%> 
                 <%end%>
             </div>
         </div>

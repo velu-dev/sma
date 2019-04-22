@@ -12,7 +12,7 @@ module PostsHelper
   end
 
   def post_content_helper(post)
-    if post.content.length < 500
+    if post.content.length < 300
       return "<p> #{post.content}</p>"
     else
       return "<p id='flex-content#{post.id}'>#{post.content.truncate(100, separator: " ")} <a id='expand-content#{post.id}'> Read more </a>

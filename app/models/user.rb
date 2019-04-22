@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  before_save :encrypt_password
+  after_save :clear_password
+
   has_many :posts
   has_many :likes
   has_many :comments
@@ -9,4 +12,16 @@ class User < ApplicationRecord
   has_many :first_users, :class_name => "ChatRoom", foreign_key: "first_user_id"
   has_many :second_users, :class_name => "ChatRoom", foreign_key: "second_user_id"
   has_one :user_detail
+
+  def encrypt_password
+    if password.present?
+      encrypt = VeEncrypt.new(password)
+      self.salt = BCrypt::Engine.generate_salt
+      self.password = BCrypt::Engine.hash_secret(password, salt)
+    end
+  end
+
+  def clear_password
+    self.password = nil
+  end
 end

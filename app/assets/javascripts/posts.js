@@ -100,6 +100,9 @@ function readURL(input) {
           }  else if (file.type.split('/')[0] == "audio") {
                $('.galary').append('<div class="col-lg-5 pip pip' + i + '"><audio class="imageThumb" controls><source src=' + event.target.result + ' title="video" type="'+file.type+'">/><br/><br/></audio><span onclick="deletepic(' + i + ')" class="remove image' + i + '">Remove Audio</span></div>')
           }
+          if (i == filesAmount-1){
+            $("#post_btn").show();
+          }
         }
         img_reader.readAsDataURL(file);
       })(input.files[i], i);
@@ -137,7 +140,8 @@ function post() {
     contentType: false,
     url: '/posts',
     success: function (res) {
-
+      var formData = new FormData();
+      img_files = [];
     }
   });
 }
@@ -156,7 +160,10 @@ function showPosition(position) {
     type: 'POST',
     url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+position.lat + ','+ position.lng +'&key=AIzaSyChEOROGegVKCpcVRKbV61T4gN1aBYGrZ4',
     success: function (res) {
-      $("#location").val(res.plus_code.compound_code.split(" ")[1]);
+      var locality = res.results[0].address_components.filter(function callback_object(obj) {
+        return obj.types.includes('locality');
+      })[0];
+      $("#location").val(locality.long_name);
     }
   });
 }

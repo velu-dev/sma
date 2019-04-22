@@ -1,0 +1,44 @@
+<div class="main-section">
+  <div class="container">
+    <div class="main-section-data">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+        </div>
+        <div class="post-bar no-margin col-lg-6 col-md-8 pd-left-none no-pd">
+          <div class="acc-setting">
+            <h3>Create Account</h3>
+            <%if flash[:notice]%>
+              <p class="acc-setting danger" id="notice"><%= notice %></p>
+            <%end%>
+
+              <%= form_tag(:action => 'find_account',:validate => true ) do %> 
+              <div class="cp-field">
+                <h5>Name</h5>
+                <div class="cpp-fiel">
+                  <input type="text" name="name" placeholder="Full Name">
+                  <i class="fa fa-user"></i>
+                </div>
+              </div>
+               <div class="cp-field">
+                <h5>Email</h5>
+                <div class="cpp-fiel">
+                  <input type="email" name="email" placeholder="Email ID">
+                  <i class="fa fa-envelope"></i>
+                </div>
+              </div>
+              <div class="save-stngs pd2">
+                <ul>
+                  <li><button type="submit" value="submit">Request Password</button></li>
+                  <li><a class="btn btn-danger" href="<%=login_path%>">Login</a></li>
+                  <%# <li><button type="submit">Restore Setting</button></li> %>
+                </ul>
+              </div>
+              <!--save-stngs end-->
+            <%end%>
+          </div>
+        </div>
+        <!--acc-setting end-->
+      </div>
+    </div>
+  </div>
+</div>

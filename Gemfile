@@ -34,7 +34,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'client_side_validations'
 gem 'carrierwave'
 gem 'carrierwave-base64'
+gem 'carrierwave_backgrounder', :github => 'lardawge/carrierwave_backgrounder'
 gem 'will_paginate', '~> 3.1.0'
+gem 'vecrypt'
+gem 'bcrypt', '~> 3.1', '>= 3.1.11'
+gem 'sidekiq'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'seed_dump'
